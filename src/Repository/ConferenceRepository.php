@@ -21,10 +21,6 @@ class ConferenceRepository extends ServiceEntityRepository
      */
     public function findConferencesBetweenDates(?\DateTimeImmutable $start = null, ?\DateTimeImmutable $end = null): array
     {
-        if (null === $start && null === $end) {
-            throw new \InvalidArgumentException('At least one date is required to operate this method.');
-        }
-
         $qb = $this->createQueryBuilder('c');
 
         if ($start instanceof \DateTimeImmutable) {

@@ -1,0 +1,33 @@
+{% props from_date = null, to_date = null %}
+
+<form action="{{ path('app_conference_list') }}" method="get">
+    <div class="mb-3 row">
+        <label for="from_date" class="col-form-label col-sm-2">From : </label>
+        <div class="col-sm-10">
+            <input type="date"
+                   name="from_date"
+                   {% if from_date is not null %}value="{{ from_date|date('Y-m-d') }}" {% endif %}
+                   class="form-control"
+                   id="from_date"
+                   placeholder="From"
+            >
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <label for="to_date" class="col-form-label col-sm-2">To : </label>
+        <div class="col-sm-10">
+            <input type="date"
+                   name="to_date"
+                   {% if to_date is not null %}value="{{ to_date|date('Y-m-d') }}" {% endif %}
+                   class="form-control"
+                   id="to_date"
+                   placeholder="To"
+            >
+        </div>
+    </div>
+
+    <div class="mb-3 row">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
