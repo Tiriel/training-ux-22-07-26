@@ -1,0 +1,16 @@
+<div{{ attributes }}>
+    {{ form_start(form) }}
+        {{ form_row(form.fromDate, {
+            attr: {
+                'data-action': 'live#action',
+                'data-live-action-param': 'filter',
+            }
+        }) }}
+        {{ form_row(form.toDate, {
+            attr: {
+                'data-action': 'live#action',
+                'data-live-action-param': 'filter',
+            }
+        }) }}
+    {{ form_end(form) }}
+</div>

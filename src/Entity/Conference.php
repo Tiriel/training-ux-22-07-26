@@ -123,7 +123,7 @@ class Conference
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeImmutable $startAt): static
+    public function setStartAt(?\DateTimeImmutable $startAt): static
     {
         $this->startAt = $startAt;
 
@@ -135,7 +135,7 @@ class Conference
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTimeImmutable $endAt): static
+    public function setEndAt(?\DateTimeImmutable $endAt): static
     {
         $this->endAt = $endAt;
 

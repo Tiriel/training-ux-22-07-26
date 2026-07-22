@@ -8,6 +8,7 @@
         <h1>New conference</h1>
     </div>
 
-    {{ include('includes/_form.html.twig', {button_label: 'Save'}) }}
+    <twig:Conference:AddConferenceForm />
+{#    {{ component('Conference:AddConferenceForm') }}#}
 </section>
 {% endblock %}
