@@ -7,7 +7,21 @@
             'data-live-action-param': 'save'
         }
     }) }}
-        {{ form_widget(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description, {
+            attr: stimulus_controller('textarea-counter')|stimulus_action('textarea-counter', 'check').toArray()|merge({minLength: 30})
+        }) }}
+        {{ form_row(form.accessible) }}
+        {{ form_row(form.prerequisites,{
+            attr: {
+                minLength: 20,
+                'data-controller': 'textarea-counter',
+                'data-action': 'textarea-counter#check',
+            }
+        }) }}
+        {{ form_row(form.startAt) }}
+        {{ form_row(form.endAt) }}
+        {{ form_row(form.organizations) }}
         <button type="submit" class="btn btn-primary">{{ button_label|default('Send') }}</button>
     {{ form_end(form) }}
 </div>
