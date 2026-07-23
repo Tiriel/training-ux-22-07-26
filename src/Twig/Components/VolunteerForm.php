@@ -80,11 +80,6 @@ class VolunteerForm extends AbstractController
         return $this->validateTimeAvailability();
     }
 
-    private function validateAllSteps(): bool
-    {
-        return $this->validateSkillsAndPreferences() && $this->validateTimeAvailability();
-    }
-
     private function validateTimeAvailability(): bool
     {
         $startAtField = $this->getForm()->get('startAt');
