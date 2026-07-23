@@ -2,13 +2,13 @@
     {{ form_start(form) }}
         {{ form_row(form.fromDate, {
             attr: {
-                'data-action': 'live#action',
+                'data-action': 'blur->live#action',
                 'data-live-action-param': 'filter',
             }
         }) }}
         {{ form_row(form.toDate, {
             attr: {
-                'data-action': 'live#action',
+                'data-action': 'blur->live#action',
                 'data-live-action-param': 'filter',
             }
         }) }}
