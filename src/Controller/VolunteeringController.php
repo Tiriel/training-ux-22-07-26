@@ -25,26 +25,15 @@ final class VolunteeringController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $volunteering = (new Volunteering())->setForUser($this->getUser());
-        $options = [];
 
         if ($request->query->get('conference')) {
             $conference = $manager->getRepository(Conference::class)->find($request->get('conference'));
             $volunteering->setConference($conference);
-            $options['conference'] = $conference;
-        }
-
-        $form = $this->createForm(VolunteeringType::class, $volunteering, $options);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($volunteering);
-            $manager->flush();
-
-            return $this->redirectToRoute('app_volunteering_show', ['id' => $volunteering->getId()]);
         }
 
         return $this->render('volunteering/new.html.twig', [
-            'form' => $form,
+            'volunteering' => $volunteering,
+            'conference' => $conference ?? null,
         ]);
     }
 }

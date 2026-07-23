@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Enum\VolunteerSkill;
 use App\Repository\VolunteeringRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,6 +34,20 @@ class Volunteering
     #[ORM\ManyToOne(inversedBy: 'volunteerings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $forUser = null;
+
+    #[Assert\NotBlank(message: 'Please select at least one skill', groups: ['skills'])]
+    #[Assert\Count(min: 1, minMessage: 'Please select at least one skill', groups: ['skills'])]
+    #[ORM\Column(type: Types::JSON, enumType: VolunteerSkill::class)]
+    /** @var VolunteerSkill[] */
+    private array $skills = [];
+
+    #[Assert\NotBlank(message: 'Please select your experience level', groups: ['skills'])]
+    #[Assert\Choice(choices: ['beginner', 'intermediate', 'expert'], groups: ['skills'])]
+    #[ORM\Column(length: 50)]
+    private ?string $experienceLevel = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $notes = null;
 
     public function getId(): ?int
     {
@@ -82,6 +98,42 @@ class Volunteering
     public function setForUser(?User $forUser): static
     {
         $this->forUser = $forUser;
+
+        return $this;
+    }
+
+    public function getSkills(): array
+    {
+        return $this->skills;
+    }
+
+    public function setSkills(array $skills): static
+    {
+        $this->skills = $skills;
+
+        return $this;
+    }
+
+    public function getExperienceLevel(): ?string
+    {
+        return $this->experienceLevel;
+    }
+
+    public function setExperienceLevel(?string $experienceLevel): static
+    {
+        $this->experienceLevel = $experienceLevel;
+
+        return $this;
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?string $notes): static
+    {
+        $this->notes = $notes;
 
         return $this;
     }
