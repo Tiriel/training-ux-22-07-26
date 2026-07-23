@@ -24,15 +24,11 @@ final class VolunteeringController extends AbstractController
     #[Route('/volunteering/new', name: 'app_volunteering_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
-        $volunteering = (new Volunteering())->setForUser($this->getUser());
-
         if ($request->query->get('conference')) {
             $conference = $manager->getRepository(Conference::class)->find($request->get('conference'));
-            $volunteering->setConference($conference);
         }
 
         return $this->render('volunteering/new.html.twig', [
-            'volunteering' => $volunteering,
             'conference' => $conference ?? null,
         ]);
     }

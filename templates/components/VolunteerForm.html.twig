@@ -1,8 +1,109 @@
 <div{{ attributes.defaults({
     class: 'col-md-8 mx-auto'
 }) }}>
+    <div class="progress mb-4">
+        <div class="progress-bar"
+             style="width: {{ (currentStep / 3) * 100 }}%">
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <small class="text-muted">Step {{ currentStep }} of 3</small>
+    </div>
+
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">{{ button_label|default('Send') }}</button>
-    {{ form_end(form) }}
+    {% if currentStep == 1 %}
+        <div class="card">
+            <div class="card-body">
+                <h5>When are you available to volunteer?</h5>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Start Time *</label>
+                            {{ form_widget(form.startAt) }}
+                            {{ form_errors(form.startAt) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">End Time *</label>
+                            {{ form_widget(form.endAt) }}
+                            {{ form_errors(form.endAt) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elseif currentStep == 2 %}
+        <div class="card">
+            <div class="card-body">
+                <h5>What skills can you contribute?</h5>
+
+                <div class="mb-3">
+                    <label class="form-label">Volunteer Skills *</label>
+                    {{ form_widget(form.skills) }}
+                    {{ form_errors(form.skills) }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Experience Level *</label>
+                    {{ form_widget(form.experienceLevel) }}
+                    {{ form_errors(form.experienceLevel) }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Additional Notes</label>
+                    {{ form_widget(form.notes) }}
+                    {{ form_errors(form.notes) }}
+                </div>
+            </div>
+        </div>
+    {% elseif currentStep == 3 %}
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                </div>
+                <h4 class="text-success">Application Submitted Successfully!</h4>
+                <p class="text-muted">
+                    Thank you for volunteering. We'll review your application and contact you soon.
+                </p>
+                <div class="mt-4">
+                    <a href="{{ path('app_conference_show', {id: conference.id}) }}"
+                       class="btn btn-primary">
+                        Back to Conference
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="d-flex justify-content-between mt-4">
+        {% if currentStep > 1 and currentStep < 3 %}
+            <button
+                class="btn btn-outline-secondary"
+                data-action="live#action:prevent"
+                data-live-action-param="previousStep">
+                Previous
+            </button>
+        {% endif %}
+
+        {% if currentStep < 2 %}
+            <button
+                class="btn btn-primary"
+                data-action="live#action:prevent"
+                data-live-action-param="nextStep">
+                Next
+            </button>
+        {% elseif currentStep == 2 %}
+            <button
+                class="btn btn-success"
+                data-action="live#action:prevent"
+                data-live-action-param="save">
+                Submit Application
+            </button>
+        {% endif %}
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
 </div>
