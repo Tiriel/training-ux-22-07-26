@@ -14,7 +14,7 @@
             <strong>Volunteers:</strong> {{ selectedConference.volunteerings.count }}
         </p>
         <div>
-            <a href="{{ path('app_conference_show', {id: selectedConference.id}) }}" class="btn text-white" style="background-color: limegreen;">
+            <a href="{{ path('app_conference_show', {id: selectedConference.id}) }}" class="btn text-white" style="background-color: limegreen;" data-turbo-action="advance">
                 View Full Details
             </a>
         </div>

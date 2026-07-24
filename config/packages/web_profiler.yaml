@@ -1,6 +1,8 @@
 when@dev:
     web_profiler:
-        toolbar: true
+        toolbar:
+            ajax_replace: true
+
 
     framework:
         profiler:

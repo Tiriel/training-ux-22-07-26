@@ -3,17 +3,17 @@
 {% block title 'All Conferences' %}
 
 {% block body %}
-<section id="list-conferences">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 m-auto">
-                <h1 class="fw-bolder" style="color: limegreen;">List all conferences</h1>
-                <div>
-                    <twig:Conference:ListFilterForm />
+    <section id="list-conferences">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 m-auto">
+                    <h1 class="fw-bolder" style="color: limegreen;">List all conferences</h1>
+                    <div>
+                        <twig:Conference:ListFilterForm />
+                    </div>
+                    <twig:Conference:ConferenceList :fromDate="fromDate" :toDate="toDate"/>
                 </div>
-                <twig:Conference:ConferenceList :fromDate="fromDate" :toDate="toDate"/>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

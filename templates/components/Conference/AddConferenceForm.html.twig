@@ -1,6 +1,11 @@
-<div{{ attributes.defaults({
-    class: 'col-md-8 mx-auto'
-}) }}>
+<div{{ attributes }}>
+{% if isSuccessful %}
+    <turbo-stream action="replace" targets="#new-conference-form-frame">
+        <template>
+            <p>Conference created! You can see it <a target="_top" href="{{ path('app_conference_show', {'id': initialFormData.id}) }}">here</a>.</p>
+        </template>
+    </turbo-stream>
+{% else %}
     {{ form_start(form, {
         attr: {
             'data-action': 'live#action:prevent',
@@ -24,4 +29,5 @@
         {{ form_row(form.organizations) }}
         <button type="submit" class="btn btn-primary">{{ button_label|default('Send') }}</button>
     {{ form_end(form) }}
+{% endif %}
 </div>

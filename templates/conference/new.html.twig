@@ -1,14 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends app.request.headers.get('turbo-frame') == 'modal-frame' ? 'modal.html.twig' : 'base.html.twig' %}
 
 {% block title 'New conference' %}
 
 {% block body %}
-<section class="container row row-cols-1">
-    <div class="col-md-8 mx-auto">
-        <h1>New conference</h1>
-    </div>
+<turbo-frame id="new-conference-form-frame">
+    <section class="container row row-cols-1">
+        <div class="col-md-8 mx-auto">
+            <h1>New conference</h1>
+        </div>
 
-    <twig:Conference:AddConferenceForm />
-{#    {{ component('Conference:AddConferenceForm') }}#}
-</section>
+        <twig:Conference:AddConferenceForm />
+    {#    {{ component('Conference:AddConferenceForm') }}#}
+    </section>
+</turbo-frame>
 {% endblock %}
