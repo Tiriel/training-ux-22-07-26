@@ -1,0 +1,22 @@
+{% props selectedConference = null %}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{ selectedConference.name }}</h5>
+        <p class="card-text">{{ selectedConference.description }}</p>
+        <p class="card-text">
+            <small class="text-muted">
+                From {{ selectedConference.startAt|date('M d, Y') }}
+                to {{ selectedConference.endAt|date('M d, Y') }}
+            </small>
+        </p>
+        <p class="card-text">
+            <strong>Volunteers:</strong> {{ selectedConference.volunteerings.count }}
+        </p>
+        <div>
+            <a href="{{ path('app_conference_show', {id: selectedConference.id}) }}" class="btn text-white" style="background-color: limegreen;">
+                View Full Details
+            </a>
+        </div>
+    </div>
+</div>

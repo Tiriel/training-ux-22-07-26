@@ -4,9 +4,10 @@
         <div class="card-body">
             <div class="card-title">
                 <h5 class="fw-bolder mb-0">
-                    <a href="{{ path('app_conference_show', {id: conference.id}) }}"
-                       class="stretched-link text-decoration-none"
-                       style="color: limegreen;">{{ conference.name }}</a>
+{#                    <a href="{{ path('app_conference_show', {id: conference.id}) }}"#}
+{#                       class="stretched-link text-decoration-none"#}
+{#                       style="color: limegreen;">{{ conference.name }}</a>#}
+                    <span style="color: limegreen;">{{ conference.name }}</span>
                 </h5>
             </div>
             <div class="card-text d-flex justify-content-between">
@@ -26,6 +27,13 @@
                         : {{ conference.accessible ? '<span style="color: limegreen;">Yes</span>' : '<span style="color: red;">No</span>' }}</p>
                 </div>
             </div>
+            <button
+                class="btn text-white mt-2"
+                style="background-color: limegreen;"
+                {{ live_action('selectConference', {conference: conference.id}) }}
+                >
+                View Details
+            </button>
         </div>
     </div>
 </div>

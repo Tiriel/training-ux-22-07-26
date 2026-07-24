@@ -33,12 +33,10 @@ class ConferenceController extends AbstractController
         $fromDate = \is_string($fromDate) ? \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM, $fromDate) : null;
         $toDate = \is_string($toDate) ? \DateTimeImmutable::createFromFormat(\DateTimeImmutable::ATOM, $toDate) : null;
 
-        dump($fromDate, $toDate);
-
         return $this->render('conference/list.html.twig', [
             'conferences' => $repository->findConferencesBetweenDates($fromDate, $toDate),
-            'from_date' => $fromDate,
-            'to_date' => $toDate,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
         ]);
     }
 
